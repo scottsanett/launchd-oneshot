@@ -27,31 +27,12 @@ id_for_job()
 
 cleanup_job()
 {
-    declare job=$1
-    local job_id launchd_agent
-
-    job_id=$(id_for_job "$job")
-    launchd_agent="/Library/LaunchDaemons/$job_id.plist"
-
-    rm -f "$JOBS_DIR/$job"
-    rm -f "$launchd_agent"
-    echo "Job done, log can be found at '$LOGS_DIR/$job.log'"
-    # `launchctl unload` will kill this process immediately
-    # `launchctl remove` will unload the job
-    launchctl remove "$job_id"
+    echo ""
 }
 
 cleanup_trigger_for_job()
 {
-    declare job_id=$1
-    local trigger_job_id launchd_agent
-
-    trigger_job_id=$1.trigger
-    launchd_agent="/Library/LaunchAgents/$trigger_job_id.plist"
-
-    rm -f "/tmp/$trigger_job_id.options"
-    rm -f "$launchd_agent"
-    launchctl remove "$trigger_job_id"
+    echo ""
 }
 
 run_job()
